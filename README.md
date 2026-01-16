@@ -53,6 +53,15 @@
 
 ---
 
+## ⚠️ DESCARGO DE RESPONSABILIDAD (DISCLAIMER)
+
+Al instalar este módulo, aceptas que eres el único responsable del uso que le des. 
+- **Uso bajo tu propio riesgo:** No me hago responsable por daños físicos al dispositivo, pérdida de datos, pantallas congeladas (bootloops) o desgaste acelerado de la batería.
+- **Garantía:** Es probable que la modificación del sistema anule tu garantía.
+- **Seguridad:** Aunque el código ha sido revisado, siempre ten una copia de seguridad y el desinstalador de KernelSU/Magisk a mano.
+
+---
+
 ## 🤝 Créditos
 - **Author:** [ExponentialRadix](https://github.com/ExponentialRadix)
 - **Technical Debug:** Gemini AI (Senior Android Dev Mode)
