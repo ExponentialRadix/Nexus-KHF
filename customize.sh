@@ -25,3 +25,10 @@ set_perm $MODPATH/post-fs-data.sh 0 0 0755
 
 ui_print "- ¡Instalación completada con éxito!"
 ui_print "- Reinicia para sentir la fluidez."
+ui_print "- Nexus-KHF v2.5 cargado correctamente."
+ui_print "————————————————————————————————"
+ui_print " ! AVISO IMPORTANTE: "
+ui_print " El autor NO se responsabiliza por"
+ui_print " daños. Úsalo bajo tu propio riesgo."
+ui_print "————————————————————————————————"
+
