@@ -1,7 +1,7 @@
 #!/system/bin/sh
 MODPATH=${0%/*}
 
-# ZRAM 3GB LZ4
+# ZRAM 2.85GB LZ4
 echo lz4 > /sys/block/zram0/comp_algorithm
 echo 2885238784 > /sys/block/zram0/disksize
 
