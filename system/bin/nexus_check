@@ -1,0 +1,41 @@
+#!/system/bin/sh
+# Nexus-KHF Auditoría Universal (Optimizado para Huawei)
+G='\033[0;32m'
+R='\033[0;31m'
+NC='\033[0m'
+
+echo "==============================================="
+echo "   AUDITORÍA NEXUS-KHF EVOLUTION v3.2          "
+echo "==============================================="
+
+# ZRAM: Verificación por tamaño (3GB = 3221225472 bytes)
+ZRAM_SZ=$(cat /sys/block/zram0/disksize 2>/dev/null || echo 0)
+if [ "$ZRAM_SZ" -ge 3221225472 ]; then
+    echo -e "${G}[✔]${NC} ZRAM: 3GB OK"
+else
+    echo -e "${R}[✘]${NC} ZRAM: FAIL"
+fi
+
+# I/O Scheduler: Búsqueda global de [none] o [mq-deadline] según corresponda
+if cat /sys/block/*/queue/scheduler 2>/dev/null | grep -q "\[none\]"; then
+    echo -e "${G}[✔]${NC} I/O: NONE OK"
+else
+    echo -e "${R}[✘]${NC} I/O: STOCK"
+fi
+
+# Térmico: Verificación de firma Nexus en el conf de Huawei
+if grep -q "NEXUS-KHF" /vendor/etc/thermal-engine.conf 2>/dev/null; then
+    echo -e "${G}[✔]${NC} Térmico: BIND OK"
+else
+    echo -e "${R}[✘]${NC} Térmico: FAIL"
+fi
+
+# Logs: Verificación de printk (0 = Desactivado)
+LOG_VAL=$(cat /proc/sys/kernel/printk | awk '{print $1}')
+if [ "$LOG_VAL" = "0" ]; then
+    echo -e "${G}[✔]${NC} Logs: DESACTIVADOS"
+else
+    echo -e "${R}[✘]${NC} Logs: ACTIVOS"
+fi
+
+echo "==============================================="

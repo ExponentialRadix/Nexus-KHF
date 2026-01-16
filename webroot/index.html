@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root { --bg: #1a1c1e; --surf: #2f3033; --prim: #d0e4ff; --succ: #b4ffb4; --err: #ffb4ab; }
+        body { font-family: sans-serif; background: var(--bg); color: #e2e2e6; padding: 20px; }
+        .card { background: var(--surf); border-radius: 20px; padding: 20px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        .line { display: flex; gap: 12px; font-size: 14px; margin-bottom: 8px; align-items: center; }
+        .ok { color: var(--succ); font-weight: bold; }
+        .fail { color: var(--err); font-weight: bold; }
+        .btn { position: fixed; bottom: 20px; right: 20px; background: var(--prim); color: #003258; border: none; padding: 16px 24px; border-radius: 16px; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center; color:var(--prim); margin-bottom: 24px;">Nexus-KHF Evolution Audit</h2>
+    <div class="card" id="audit">Analizando parámetros...</div>
+    <button class="btn" onclick="run()">REESCANEAR</button>
+    <script>
+        async function run() {
+            const audit = document.getElementById('audit');
+            const tests = [
+                { l: "ZRAM: 3GB Aplicada", c: "cat /sys/block/zram0/disksize", e: "3221225472" },
+                { l: "Compresión: LZ4 Activo", c: "cat /sys/block/zram0/comp_algorithm", e: "[lz4]" },
+                { l: "I/O Scheduler: Mode None", c: "cat /sys/block/*/queue/scheduler", e: "[none]" },
+                { l: "Térmico: Nexus-KHF Activo", c: "grep -q 'NEXUS-KHF' /vendor/etc/thermal-engine.conf && echo 1 || echo 0", e: "1" },
+                { l: "Logs: Kernel Spam Off", c: "cat /proc/sys/kernel/printk | awk '{print $1}'", e: "0" }
+            ];
+            let html = "";
+            for (let t of tests) {
+                const r = await ksu.exec(t.c);
+                const ok = r.includes(t.e);
+                html += `<div class="line"><span class="${ok?'ok':'fail'}">${ok?'[✔]':'[✘]'}</span><span>${t.l}</span></div>`;
+            }
+            audit.innerHTML = html;
+        }
+        run();
+    </script>
+</body>
+</html>

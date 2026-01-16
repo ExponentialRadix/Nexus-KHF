@@ -1,0 +1,18 @@
+# Gráficos y UI
+ro.surface_flinger.max_frame_buffer_acquired_buffers=3
+debug.sf.latch_unsignaled=1
+persist.sys.composition.type=gpu
+debug.cpurend.vsync=true
+debug.egl.hw=1
+debug.sf.hw=1
+persist.sys.ui.hw=true
+
+# Respuesta Táctica y Scroll
+windowsmgr.max_events_per_sec=180
+ro.min.fling_velocity=160
+ro.max.fling_velocity=20000
+
+# Performance SM6225
+ro.vendor.qti.sdk.performance=true
+persist.sys.power.default.perf=1
+debug.stagefright.ccodec=4

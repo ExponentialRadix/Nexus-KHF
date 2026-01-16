@@ -1,0 +1,6 @@
+id=Nexus_KHF_Evolution
+name=Nexus-KHF Evolution + ZRAM Optimizer
+version=v2.8-Final-Hybrid
+versionCode=28
+author=. /Exponential.Radix
+description=Merged Build: Thermal Control + 3GB ZRAM (LZ4) + UFS 2.2/GPU Boost for SM6225.
